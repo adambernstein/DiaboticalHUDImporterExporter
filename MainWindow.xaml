@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:DiaboticalHUDImporterExporter"
         mc:Ignorable="d"
         Title="Diabotical HUD Importer/Exporter" Height="450" Width="800">
     <Grid>
@@ -17,9 +17,6 @@
         <TextBlock HorizontalAlignment="Left" Height="35" Margin="356.041,30,0,0" TextWrapping="Wrap" Text="Export HUD (.dhud)" VerticalAlignment="Top" Width="350" TextAlignment="Center" Grid.Column="1"/>
         <Button Content="Export" Grid.Column="1" HorizontalAlignment="Left" Margin="491,65,0,0" VerticalAlignment="Top" Width="75" Click="ExportDhud"/>
         <TextBlock x:Name="StatusText1" Grid.Column="1" HorizontalAlignment="Left" Margin="364,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="335"/>
-        <ScrollViewer x:Name="ScrollViewer1" Grid.Column="1" HorizontalAlignment="Left" Height="110" Margin="439,115,0,0" VerticalAlignment="Top" Width="135">
-            <TextBox x:Name="TextFileContent" Height="1545" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-        </ScrollViewer>
 
     </Grid>
 </Window>

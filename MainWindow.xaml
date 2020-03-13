@@ -18,7 +18,6 @@
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         <DockPanel Background="#FF1E3647" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top">
-            <Image Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Source="dhudIcon.ico" Width="32"/>
             <TextBlock HorizontalAlignment="Center" Text="Diabotical HUD Importer/Exporter" FontSize="20" VerticalAlignment="Center" Height="30"/>
         </DockPanel>
         <DockPanel x:Name="SidebarPanel" Background="#FF185877" Margin="0" Panel.ZIndex="3" Grid.Row="1">
@@ -26,7 +25,8 @@
                 <DropShadowEffect/>
             </DockPanel.Effect>
             <StackPanel>
-                <Button x:Name="SettingsBackupButton" Margin="0,125,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}">
+                <Image Margin="0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Source="artwork1.jpg"/>
+                <Button x:Name="SettingsBackupButton" Margin="0,15,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}">
                     <Grid Width="180">
                         <materialDesign:PackIcon Kind="ContentSaveSettings" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="Backup settings" FontSize="20" VerticalAlignment="Center" Height="30" Padding="10,0,0,0" Margin="-13,0,-12,0" Width="205" TextAlignment="Center"/>

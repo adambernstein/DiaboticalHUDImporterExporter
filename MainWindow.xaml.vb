@@ -65,5 +65,9 @@ Class MainWindow
         ExportPanel.Visibility = Visibility.Visible
         ExportDhud(sender, e)
     End Sub
+    Private Sub ShowBackupPanel(sender As Object, e As RoutedEventArgs)
+        BackupPanel.Visibility = Visibility.Visible
+        'ExportDhud(sender, e)
+    End Sub
 
 End Class

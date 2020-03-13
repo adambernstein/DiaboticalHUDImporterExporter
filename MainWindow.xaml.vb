@@ -5,6 +5,7 @@ Imports Microsoft.Win32
 Class MainWindow
     Private Sub ExportDhud(sender As Object, e As RoutedEventArgs)
         StatusText1.Text = "Exporting...."
+        Dim SenderName As String = DirectCast(sender, System.Windows.FrameworkElement).Name
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
         'Dim SettingsFile As String = My.Computer.FileSystem.ReadAllText(appData & "\Diabotical\Settings.txt")
         Dim HudSettings As String
@@ -28,9 +29,13 @@ Class MainWindow
             End While
         End Using
         If HudSettings IsNot Nothing Then
-            WriteHudFile(HudSettings)
+            If SenderName = "ExportToFile" Then
+                WriteHudFile(HudSettings)
+            Else
+                ShowHudJSON(HudSettings)
+            End If
         Else
-            StatusText1.Text = "Could not find HUD settings."
+            StatusText1.Text = "Could not find Diabolical settings."
         End If
     End Sub
     Private Sub WriteHudFile(contents As String)
@@ -45,6 +50,13 @@ Class MainWindow
             StatusText1.Text = "Saved HUD settings to" & saveFileDialog1.FileName
         End If
     End Sub
-
+    Private Sub ShowHudJSON(contents As String)
+        OutputDisplayBox.Text = contents
+        OutputDisplayBox.SelectAll()
+    End Sub
+    Private Sub CopyDhudJSON()
+        OutputDisplayBox.SelectAll()
+        OutputDisplayBox.Copy()
+    End Sub
 
 End Class

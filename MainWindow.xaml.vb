@@ -3,31 +3,72 @@ Imports System.IO
 Imports Microsoft.Win32
 
 Class MainWindow
+    'Import
+    Private Sub ImportDhud(sender As Object, e As RoutedEventArgs)
+        StatusText1.Text = "Importing..."
+        Dim SenderName As String = DirectCast(sender, FrameworkElement).Name
+        Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
+        Dim diaboticalSettingsPath = appData & "\Diabotical\Settings.txt"
+        Dim NewHudSettings As String = ""
+        If My.Computer.FileSystem.FileExists(diaboticalSettingsPath) Then
+            Using SettingsFile As New FileIO.TextFieldParser(diaboticalSettingsPath)
+                SettingsFile.TextFieldType = FileIO.FieldType.Delimited
+                SettingsFile.SetDelimiters("=")
+                Dim currentRow As String()
+                While Not SettingsFile.EndOfData
+                    Try
+                        currentRow = SettingsFile.ReadFields()
+                        Dim currentField As String
+                        For Each currentField In currentRow
+                            If currentField = "hud_definition" Then
+                                If SenderName = "ImportFromFile" Then
+                                    NewHudSettings = currentRow(1)
+                                    StatusText1.Text = "Found HUD settings."
+                                End If
+                            End If
+                        Next
+                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                        MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+                    End Try
+                End While
+            End Using
+        Else
+            StatusText1.Text = "Settings file not found."
+            MsgBox("Diabotical settings not found. Please check that %appdata%/Diabotical/Settings.txt exists.")
+        End If
+
+    End Sub
+    'Export
     Private Sub ExportDhud(sender As Object, e As RoutedEventArgs)
         StatusText1.Text = "Exporting...."
         Dim SenderName As String = DirectCast(sender, System.Windows.FrameworkElement).Name
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
-        'Dim SettingsFile As String = My.Computer.FileSystem.ReadAllText(appData & "\Diabotical\Settings.txt")
+        Dim diaboticalSettingsPath = appData & "\Diabotical\Settings.txt"
         Dim HudSettings As String = ""
-        Using SettingsFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(appData & "\Diabotical\Settings.txt")
-            SettingsFile.TextFieldType = FileIO.FieldType.Delimited
-            SettingsFile.SetDelimiters("=")
-            Dim currentRow As String()
-            While Not SettingsFile.EndOfData
-                Try
-                    currentRow = SettingsFile.ReadFields()
-                    Dim currentField As String
-                    For Each currentField In currentRow
-                        If currentField = "hud_definition" Then
-                            HudSettings = currentRow(1)
-                            StatusText1.Text = "Found HUD settings."
-                        End If
-                    Next
-                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
-                End Try
-            End While
-        End Using
+        If My.Computer.FileSystem.FileExists(diaboticalSettingsPath) Then
+            Using SettingsFile As New FileIO.TextFieldParser(diaboticalSettingsPath)
+                SettingsFile.TextFieldType = FileIO.FieldType.Delimited
+                SettingsFile.SetDelimiters("=")
+                Dim currentRow As String()
+                While Not SettingsFile.EndOfData
+                    Try
+                        currentRow = SettingsFile.ReadFields()
+                        Dim currentField As String
+                        For Each currentField In currentRow
+                            If currentField = "hud_definition" Then
+                                HudSettings = currentRow(1)
+                                StatusText1.Text = "Found HUD settings."
+                            End If
+                        Next
+                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                        MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+                    End Try
+                End While
+            End Using
+        Else
+            StatusText1.Text = "Settings file not found."
+            MsgBox("Diabotical settings not found. Please check that %appdata%/Diabotical/Settings.txt exists.")
+        End If
         If HudSettings IsNot Nothing Then
             If SenderName = "ExportToFile" Then
                 WriteHudFile(HudSettings)
@@ -81,7 +122,9 @@ Class MainWindow
             End If
         End If
     End Sub
+    Private Sub ImportFromJSON(sender As Object, e As RoutedEventArgs)
 
+    End Sub
     'Panel controls
     Private Sub ShowExportPanel(sender As Object, e As RoutedEventArgs)
         ExportPanel.Visibility = Visibility.Visible

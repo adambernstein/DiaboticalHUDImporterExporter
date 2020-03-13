@@ -20,6 +20,8 @@
         <DockPanel Background="#FF1E3647" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top">
             <TextBlock HorizontalAlignment="Center" Text="Diabotical HUD Importer/Exporter" FontSize="20" VerticalAlignment="Center" Height="30"/>
         </DockPanel>
+        
+        <!--Sidebar-->
         <DockPanel x:Name="SidebarPanel" Background="#FF185877" Margin="0" Panel.ZIndex="3" Grid.Row="1">
             <DockPanel.Effect>
                 <DropShadowEffect/>
@@ -49,9 +51,13 @@
                 </Button>
             </StackPanel>
         </DockPanel>
-        <DockPanel x:Name="DefaultPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Visibility="Visible">
-            <TextBlock Text="Start by selecting an action." Grid.Column="1" Margin="0,150,0,-150" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+        
+        <!--Default Panel-->
+        <DockPanel x:Name="DefaultPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Visibility="Collapsed">
+            <TextBlock Grid.Column="1" Margin="0" Foreground="White" DockPanel.Dock="Top" VerticalAlignment="Center" HorizontalAlignment="Center" Width="600"><Run Text="Start by selecting an action on the left:"/><LineBreak/><Run/><LineBreak/><Run FontWeight="Bold" Text="* Backup Settings"/><Run Text=": Backs up *all* Diabotical settings to a file/path of your choosing. "/><LineBreak/><Run Text="A good place to start before importing a new HUD in case you break everything."/><LineBreak/><Run/><LineBreak/><Run FontWeight="Bold" Text="* Export HUD"/><Run Text=": Exports HUD settings to either to a copy/paste window or to a file"/><LineBreak/><Run Text="which you can share with your friends, assuming you have friends."/><LineBreak/><Run/><LineBreak/><Run FontWeight="Bold" Text="* Import HUD"/><Run Text=": Imports HUD from either a file that your 'friend' sent or "/><LineBreak/><Run Text="from the paste-able input box. "/></TextBlock>
         </DockPanel>
+        
+        <!--Backup Panel--> 
         <DockPanel x:Name="BackupPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Visibility="Collapsed">
             <Label Content="Back up all settings to a file:" Grid.Column="1" Margin="0,150,0,-150" Style="{DynamicResource SimpleLabel}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top"/>
             <Button x:Name="BackupSettingsButton" Grid.Column="1" Margin="0" VerticalAlignment="Center" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="BackupAllSettings" DockPanel.Dock="Top" Width="200">
@@ -59,6 +65,8 @@
             </Button>
             
         </DockPanel>
+        
+        <!--Export Panel-->
         <DockPanel x:Name="ExportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720" Visibility="Collapsed">
             <Label Content="HUD JSON: " Grid.Column="1" Margin="10,10,0,0" Style="{DynamicResource SimpleLabel}" VerticalAlignment="Top" Foreground="White"/>
             <TextBox x:Name="OutputDisplayBox" Grid.Column="1" Margin="-90,35,0,0" TextWrapping="Wrap" Foreground="#FF191919" AllowDrop="False" IsReadOnly="True" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsInactiveSelectionHighlightEnabled="True" Panel.ZIndex="2" Height="300" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="0" Width="700"/>
@@ -69,17 +77,20 @@
                 <TextBlock HorizontalAlignment="Center" Text="Copy" FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
             </Button>
         </DockPanel>
-        <DockPanel x:Name="ImportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720" Visibility="Collapsed">
-            <Label Content="Paste HUD JSON (from 'hud_definition'): " Grid.Column="1" Margin="10,10,0,0" Style="{DynamicResource SimpleLabel}" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox x:Name="InputDisplayBox" Grid.Column="1" Margin="-90,35,0,0" TextWrapping="Wrap" Foreground="#FF191919" AllowDrop="False" IsReadOnly="True" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsInactiveSelectionHighlightEnabled="True" Panel.ZIndex="2" Height="300" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="0" Width="700"/>
-            <Button x:Name="ImportFromFile" Grid.Column="1" Margin="0,5,12,0" Width="145" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud" VerticalAlignment="Top" Panel.ZIndex="5" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                <TextBlock HorizontalAlignment="Center" Text="Export to file..." FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
+        
+        <!--Import Panel-->
+        <DockPanel x:Name="ImportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720" Visibility="Visible">
+            <Label Content="Paste HUD JSON (from hud _definition): " Grid.Column="1" Margin="10,10,0,0" Style="{DynamicResource SimpleLabel}" VerticalAlignment="Top" Foreground="White"/>
+            <TextBox x:Name="InputDisplayBox" Grid.Column="1" Margin="-290,35,0,0" TextWrapping="Wrap" Foreground="#FF191919" AllowDrop="False" IsReadOnly="True" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsInactiveSelectionHighlightEnabled="True" Panel.ZIndex="2" Height="300" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="0" Width="700"/>
+            <Button x:Name="ImportJSONFromPanel" Grid.Column="1" Margin="0,5,10,0" VerticalAlignment="Top" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Right" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ImportFromJSON" DockPanel.Dock="Right">
+                <TextBlock HorizontalAlignment="Center" Text="Import" FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
             </Button>
-            <Button x:Name="ImportJSONFromPanel" Grid.Column="1" Margin="0,5,10,0" VerticalAlignment="Top" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Right" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="CopyDhudJSON" DockPanel.Dock="Right">
-                <TextBlock HorizontalAlignment="Center" Text="Copy" FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
+            <Button x:Name="ImportFromFile" Grid.Column="1" Margin="0,5,12,0" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ImportDhud" VerticalAlignment="Top" Panel.ZIndex="5" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                <TextBlock HorizontalAlignment="Center" Text="Import from .dhud file..." FontSize="16" Padding="0,0,0,0" Width="180" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
             </Button>
         </DockPanel>
-
+        
+        <!--Status Bar-->
         <TextBlock x:Name="StatusText1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Background="#FF1E3647" TextAlignment="Right" Padding="0,0,20,0" Grid.ColumnSpan="2" Grid.Row="2" Panel.ZIndex="17" Height="35"/>
     </Grid>
 </Window>

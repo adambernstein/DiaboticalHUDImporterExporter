@@ -10,16 +10,28 @@ Class MainWindow
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
         Dim diaboticalSettingsPath = appData & "\Diabotical\Settings.txt"
         Dim NewHudSettings As String = ""
-        Dim newline As String = "NEW LINE"
+
+        If SenderName = "ImportJSONFromPanel" Then
+            NewHudSettings = InputDisplayBox.Text
+        ElseIf SenderName = "ImportFromFile" Then
+            Dim SelectDhudFileDialog As New OpenFileDialog With {
+                .Filter = "dhud files (*.dhud)|*.dhud|All files (*.*)|*.*",
+                .FilterIndex = 1,
+                .RestoreDirectory = True
+            }
+            If SelectDhudFileDialog.ShowDialog() = True Then
+                NewHudSettings = File.ReadAllText(SelectDhudFileDialog.FileName)
+            End If
+        End If
         If My.Computer.FileSystem.FileExists(diaboticalSettingsPath) Then
             Dim lines() As String = File.ReadAllLines(diaboticalSettingsPath)
             For i As Integer = 0 To lines.Length - 1
                 If lines(i).Contains("hud_definition") Then
-                    If SenderName = "ImportJSONFromPanel" Then
-                        lines(i) = InputDisplayBox.Text
-
-                    End If
+                    lines(i) = NewHudSettings
+                Else
+                    StatusText1.Text = "HUD definition not found. Please restore a working settings file."
                 End If
+
             Next
             File.WriteAllLines(diaboticalSettingsPath, lines)
             StatusText1.Text = "Wrote HUD to settings file."

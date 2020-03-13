@@ -62,12 +62,13 @@ Class MainWindow
         StatusText1.Text = "Copied HUD settings to clipboard."
     End Sub
     Private Sub ShowExportPanel(sender As Object, e As RoutedEventArgs)
+        BackupPanel.Visibility = Visibility.Collapsed
         ExportPanel.Visibility = Visibility.Visible
         ExportDhud(sender, e)
     End Sub
     Private Sub ShowBackupPanel(sender As Object, e As RoutedEventArgs)
+        ExportPanel.Visibility = Visibility.Collapsed
         BackupPanel.Visibility = Visibility.Visible
-        'ExportDhud(sender, e)
     End Sub
     Private Sub BackupAllSettings(sender As Object, e As RoutedEventArgs)
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)

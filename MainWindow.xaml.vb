@@ -27,7 +27,7 @@ Class MainWindow
             Dim lines() As String = File.ReadAllLines(diaboticalSettingsPath)
             For i As Integer = 0 To lines.Length - 1
                 If lines(i).Contains("hud_definition") Then
-                    lines(i) = NewHudSettings
+                    lines(i) = "hud_definition = " & NewHudSettings
                 Else
                     StatusText1.Text = "HUD definition not found. Please restore a working settings file."
                 End If
@@ -39,28 +39,6 @@ Class MainWindow
             StatusText1.Text = "Settings file not found."
             MsgBox("Diabotical settings not found. Please check that %appdata%/Diabotical/Settings.txt exists.")
         End If
-        'Using SettingsFile As New FileIO.TextFieldParser(diaboticalSettingsPath)
-        '    SettingsFile.TextFieldType = FileIO.FieldType.Delimited
-        '    SettingsFile.SetDelimiters("=")
-        '    Dim currentRow As String()
-        '    While Not SettingsFile.EndOfData
-        '        Try
-        '            currentRow = SettingsFile.ReadFields()
-        '            Dim currentField As String
-        '            For Each currentField In currentRow
-        '                If currentField = "hud_definition" Then
-        '                        currentRow(1) = "1234"
-        '                        StatusText1.Text = "Wrote HUD settings."
-        '                    End If
-        '                End If
-        '            Next
-
-        '        Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-        '            MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
-        '        End Try
-        '    End While
-        'End Using
-
     End Sub
     'Export
     Private Sub ExportDhud(sender As Object, e As RoutedEventArgs)

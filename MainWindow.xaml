@@ -32,7 +32,7 @@
                     </Grid>
 
                 </Button>
-                <Button x:Name="ExportHUDButton" Margin="1,15,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud" UseLayoutRounding="False">
+                <Button x:Name="ExportHUDButton" Margin="1,15,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ShowExportPanel" UseLayoutRounding="False">
                     <Grid Width="180">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -46,7 +46,7 @@
 
             </StackPanel>
         </DockPanel>
-        <DockPanel x:Name="ExportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720">
+        <DockPanel x:Name="ExportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720" Visibility="Collapsed">
             <Label Content="HUD JSON: " Grid.Column="1" Margin="10,10,0,0" Style="{DynamicResource SimpleLabel}" VerticalAlignment="Top" Foreground="White"/>
             <TextBox x:Name="OutputDisplayBox" Grid.Column="1" Margin="-90,35,0,0" TextWrapping="Wrap" Foreground="#FF323232" AllowDrop="False" IsReadOnly="True" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsInactiveSelectionHighlightEnabled="True" Panel.ZIndex="2" Height="300" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="0" Width="700"/>
             <Button x:Name="ExportToFile" Grid.Column="1" Margin="0,5,9,0" Width="145" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud" VerticalAlignment="Top" Panel.ZIndex="5" HorizontalAlignment="Right" DockPanel.Dock="Right">
@@ -56,6 +56,6 @@
                 <TextBlock HorizontalAlignment="Center" Text="Copy" FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
             </Button>
         </DockPanel>
-        <TextBlock x:Name="StatusText1" HorizontalAlignment="Left" Margin="0,537,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="992" Background="#FF1E3647" TextAlignment="Right" Padding="0,0,20,0" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="StatusText1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Background="#FF1E3647" TextAlignment="Right" Padding="0,0,20,0" Grid.ColumnSpan="2" Grid.Row="2" Panel.ZIndex="17" Height="35"/>
     </Grid>
 </Window>

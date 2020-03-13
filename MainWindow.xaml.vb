@@ -61,8 +61,9 @@ Class MainWindow
         OutputDisplayBox.Copy()
         StatusText1.Text = "Copied HUD settings to clipboard."
     End Sub
-    Private Sub ShowExportPanel()
-
+    Private Sub ShowExportPanel(sender As Object, e As RoutedEventArgs)
+        ExportPanel.Visibility = Visibility.Visible
+        ExportDhud(sender, e)
     End Sub
 
 End Class

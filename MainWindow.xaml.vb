@@ -61,5 +61,8 @@ Class MainWindow
         OutputDisplayBox.Copy()
         StatusText1.Text = "Copied HUD settings to clipboard."
     End Sub
+    Private Sub ShowExportPanel()
+
+    End Sub
 
 End Class

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DiaboticalHUDImporterExporter"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Name="DHUD_Main" x:Class="MainWindow"
         mc:Ignorable="d"
-        Title="Diabotical HUD Importer/Exporter" Height="600" Width="1000" Background="#FF212A36" Foreground="White" ResizeMode="NoResize" Icon="dhudIcon.ico" FontSize="16" Padding="0" WindowStartupLocation="CenterScreen" BorderBrush="Black" WindowStyle="ThreeDBorderWindow">
+        Title="Diabotical HUD Importer/Exporter" Height="600" Width="1000" Background="#FF212A36" Foreground="White" ResizeMode="NoResize" Icon="dhudIcon.ico" FontSize="16" Padding="0" WindowStartupLocation="CenterScreen" BorderBrush="Black">
     <Grid Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275"/>
@@ -18,6 +18,7 @@
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         <DockPanel Background="#FF1E3647" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top">
+            <Image Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Source="dhudIcon.ico" Width="32"/>
             <TextBlock HorizontalAlignment="Center" Text="Diabotical HUD Importer/Exporter" FontSize="20" VerticalAlignment="Center" Height="30"/>
         </DockPanel>
         <DockPanel x:Name="SidebarPanel" Background="#FF185877" Margin="0" Panel.ZIndex="3" Grid.Row="1">
@@ -46,10 +47,10 @@
 
             </StackPanel>
         </DockPanel>
-        <DockPanel x:Name="ExportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720" Visibility="Collapsed">
+        <DockPanel x:Name="ExportPanel" Grid.Column="1" Margin="0" Panel.ZIndex="1" Grid.Row="1" Width="720">
             <Label Content="HUD JSON: " Grid.Column="1" Margin="10,10,0,0" Style="{DynamicResource SimpleLabel}" VerticalAlignment="Top" Foreground="White"/>
             <TextBox x:Name="OutputDisplayBox" Grid.Column="1" Margin="-90,35,0,0" TextWrapping="Wrap" Foreground="#FF323232" AllowDrop="False" IsReadOnly="True" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsInactiveSelectionHighlightEnabled="True" Panel.ZIndex="2" Height="300" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="0" Width="700"/>
-            <Button x:Name="ExportToFile" Grid.Column="1" Margin="0,5,9,0" Width="145" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud" VerticalAlignment="Top" Panel.ZIndex="5" HorizontalAlignment="Right" DockPanel.Dock="Right">
+            <Button x:Name="ExportToFile" Grid.Column="1" Margin="0,5,10,0" Width="145" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud" VerticalAlignment="Top" Panel.ZIndex="5" HorizontalAlignment="Right" DockPanel.Dock="Right">
                 <TextBlock HorizontalAlignment="Center" Text="Export to file..." FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
             </Button>
             <Button x:Name="CopyToClipboard" Grid.Column="1" Margin="0,5,10,0" VerticalAlignment="Top" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Right" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="CopyDhudJSON" DockPanel.Dock="Right">

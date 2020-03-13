@@ -10,32 +10,44 @@ Class MainWindow
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
         Dim diaboticalSettingsPath = appData & "\Diabotical\Settings.txt"
         Dim NewHudSettings As String = ""
+        Dim newline As String = "NEW LINE"
         If My.Computer.FileSystem.FileExists(diaboticalSettingsPath) Then
-            Using SettingsFile As New FileIO.TextFieldParser(diaboticalSettingsPath)
-                SettingsFile.TextFieldType = FileIO.FieldType.Delimited
-                SettingsFile.SetDelimiters("=")
-                Dim currentRow As String()
-                While Not SettingsFile.EndOfData
-                    Try
-                        currentRow = SettingsFile.ReadFields()
-                        Dim currentField As String
-                        For Each currentField In currentRow
-                            If currentField = "hud_definition" Then
-                                If SenderName = "ImportFromFile" Then
-                                    NewHudSettings = currentRow(1)
-                                    StatusText1.Text = "Found HUD settings."
-                                End If
-                            End If
-                        Next
-                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                        MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
-                    End Try
-                End While
-            End Using
+            Dim lines() As String = File.ReadAllLines(diaboticalSettingsPath)
+            For i As Integer = 0 To lines.Length - 1
+                If lines(i).Contains("hud_definition") Then
+                    If SenderName = "ImportJSONFromPanel" Then
+                        lines(i) = InputDisplayBox.Text
+
+                    End If
+                End If
+            Next
+            File.WriteAllLines(diaboticalSettingsPath, lines)
+            StatusText1.Text = "Wrote HUD to settings file."
         Else
             StatusText1.Text = "Settings file not found."
             MsgBox("Diabotical settings not found. Please check that %appdata%/Diabotical/Settings.txt exists.")
         End If
+        'Using SettingsFile As New FileIO.TextFieldParser(diaboticalSettingsPath)
+        '    SettingsFile.TextFieldType = FileIO.FieldType.Delimited
+        '    SettingsFile.SetDelimiters("=")
+        '    Dim currentRow As String()
+        '    While Not SettingsFile.EndOfData
+        '        Try
+        '            currentRow = SettingsFile.ReadFields()
+        '            Dim currentField As String
+        '            For Each currentField In currentRow
+        '                If currentField = "hud_definition" Then
+        '                        currentRow(1) = "1234"
+        '                        StatusText1.Text = "Wrote HUD settings."
+        '                    End If
+        '                End If
+        '            Next
+
+        '        Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+        '            MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+        '        End Try
+        '    End While
+        'End Using
 
     End Sub
     'Export
@@ -58,6 +70,8 @@ Class MainWindow
                             If currentField = "hud_definition" Then
                                 HudSettings = currentRow(1)
                                 StatusText1.Text = "Found HUD settings."
+                            Else
+                                StatusText1.Text = "HUD definition not found. Please restore a working settings file."
                             End If
                         Next
                     Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
@@ -123,8 +137,11 @@ Class MainWindow
         End If
     End Sub
     Private Sub ImportFromJSON(sender As Object, e As RoutedEventArgs)
-
+        If InputDisplayBox.Text IsNot Nothing Then
+            MsgBox(InputDisplayBox.Text)
+        End If
     End Sub
+
     'Panel controls
     Private Sub ShowExportPanel(sender As Object, e As RoutedEventArgs)
         ExportPanel.Visibility = Visibility.Visible

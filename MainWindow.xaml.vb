@@ -8,7 +8,7 @@ Class MainWindow
         Dim SenderName As String = DirectCast(sender, System.Windows.FrameworkElement).Name
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
         'Dim SettingsFile As String = My.Computer.FileSystem.ReadAllText(appData & "\Diabotical\Settings.txt")
-        Dim HudSettings As String
+        Dim HudSettings As String = ""
         Using SettingsFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(appData & "\Diabotical\Settings.txt")
             SettingsFile.TextFieldType = FileIO.FieldType.Delimited
             SettingsFile.SetDelimiters("=")
@@ -47,16 +47,19 @@ Class MainWindow
 
         If saveFileDialog1.ShowDialog() = True Then
             File.WriteAllText(saveFileDialog1.FileName, contents)
-            StatusText1.Text = "Saved HUD settings to" & saveFileDialog1.FileName
+            StatusText1.Text = "Saved HUD settings to " & saveFileDialog1.FileName
         End If
     End Sub
     Private Sub ShowHudJSON(contents As String)
         OutputDisplayBox.Text = contents
+        OutputDisplayBox.Focus()
         OutputDisplayBox.SelectAll()
     End Sub
     Private Sub CopyDhudJSON()
+        OutputDisplayBox.Focus()
         OutputDisplayBox.SelectAll()
         OutputDisplayBox.Copy()
+        StatusText1.Text = "Copied HUD settings to clipboard."
     End Sub
 
 End Class

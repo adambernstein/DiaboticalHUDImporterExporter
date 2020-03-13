@@ -15,22 +15,26 @@
         <DockPanel Background="#FF1E3647" Grid.ColumnSpan="2" Width="992" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBlock HorizontalAlignment="Center" Text="Diabotical HUD Importer/Exporter" FontSize="20" VerticalAlignment="Center" Height="30"/>
         </DockPanel>
-        <DockPanel Background="#FF185877" Grid.ColumnSpan="2" Margin="0,35,717,0" Width="275">
+        <DockPanel Background="#FF185877" Grid.ColumnSpan="2" Margin="0,35,717,0" Width="275" Panel.ZIndex="3">
             <DockPanel.Effect>
                 <DropShadowEffect/>
             </DockPanel.Effect>
             <StackPanel>
-                <Button x:Name="SettingsBackupButton" Margin="10,20,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}">
+                <Button x:Name="SettingsBackupButton" Margin="0,125,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}">
                     <Grid Width="180">
                         <materialDesign:PackIcon Kind="ContentSaveSettings" VerticalAlignment="Center"/>
                         <TextBlock HorizontalAlignment="Center" Text="Backup settings" FontSize="20" VerticalAlignment="Center" Height="30" Padding="10,0,0,0" Margin="-13,0,-12,0" Width="205" TextAlignment="Center"/>
                     </Grid>
 
                 </Button>
-                <Button x:Name="ExportHUDButton" Margin="10,20,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud">
+                <Button x:Name="ExportHUDButton" Margin="1,15,0,0" VerticalAlignment="Center" Width="210" Background="#FF0084C1" Foreground="White" FontSize="18" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud">
                     <Grid Width="180">
-                        <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center"/>
-                        <TextBlock HorizontalAlignment="Center" Text="Export HUD" FontSize="20" VerticalAlignment="Center" Height="30" Padding="10,0,0,0" Margin="-13,0,-12,0" Width="205" TextAlignment="Center"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="9*"/>
+                        </Grid.RowDefinitions>
+                        <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center" Margin="0,4,0,7" Grid.Row="1"/>
+                        <TextBlock HorizontalAlignment="Center" Text="Export HUD" FontSize="20" VerticalAlignment="Center" Height="30" Padding="10,0,0,0" Margin="-13,0,-12,0" Width="205" TextAlignment="Center" Grid.RowSpan="2"/>
                     </Grid>
 
                 </Button>
@@ -38,18 +42,12 @@
             </StackPanel>
         </DockPanel>
         <Label Content="HUD JSON: " Grid.Column="1" HorizontalAlignment="Left" Margin="194.999,61.816,0,0" Style="{DynamicResource SimpleLabel}" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox x:Name="OutputDisplayBox" Grid.Column="1" HorizontalAlignment="Left" Height="231" Margin="194.904,88.096,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="685" SelectionOpacity="40" Foreground="#FF535353" AllowDrop="False" Focusable="False" IsTabStop="False" VerticalScrollBarVisibility="Auto"/>
-        <Button x:Name="ExportToFile" Grid.Column="1" Margin="764.904,324.096,16.904,217.904" VerticalAlignment="Center" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud">
-            <TextBlock HorizontalAlignment="Center" Text="Export to file..." FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center"/>
-        </Button>
-        <TextBlock x:Name="StatusText1" HorizontalAlignment="Left" Margin="195,542,-0.192,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="702" Grid.Column="1" Background="#FF1E3647"/>
-        <Button x:Name="ExportToFile_Copy" Grid.Column="1" Margin="764.904,324.096,16.904,217.904" VerticalAlignment="Center" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud">
-            <TextBlock HorizontalAlignment="Center" Text="Export to file..." FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center"/>
-        </Button>
-        <Button x:Name="ExportToFile_Copy1" Grid.Column="1" Margin="764.904,324.096,16.904,217.904" VerticalAlignment="Center" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud">
+        <TextBox x:Name="OutputDisplayBox" Grid.Column="1" HorizontalAlignment="Left" Height="231" Margin="194.904,88.096,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="685" Foreground="#FF323232" AllowDrop="False" IsReadOnly="True" IsTabStop="False" VerticalScrollBarVisibility="Auto" IsInactiveSelectionHighlightEnabled="True"/>
+        <Button x:Name="ExportToFile" Grid.Column="1" Margin="735,324,17,218" VerticalAlignment="Center" Width="145" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="ExportDhud">
             <TextBlock HorizontalAlignment="Center" Text="Export to file..." FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
         </Button>
-        <Button x:Name="CopyToClipboard" Grid.Column="1" Margin="645,324,137,218" VerticalAlignment="Center" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="CopyDhudJSON">
+        <TextBlock x:Name="StatusText1" HorizontalAlignment="Left" Margin="0,542,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="992" Background="#FF1E3647" TextAlignment="Right" Padding="0,0,20,0" Grid.ColumnSpan="2"/>
+        <Button x:Name="CopyToClipboard" Grid.Column="1" Margin="615,324,167,218" VerticalAlignment="Center" Width="115" Background="#FF0084C1" Foreground="White" FontSize="16" BorderBrush="#FF0084C1" HorizontalAlignment="Center" Height="35" BorderThickness="0" Style="{DynamicResource SimpleButton}" FocusVisualStyle="{DynamicResource MaterialSimpleButtonFocusVisual}" Click="CopyDhudJSON">
             <TextBlock HorizontalAlignment="Center" Text="Copy" FontSize="16" Padding="0,0,0,0" Width="115" TextAlignment="Center" VerticalAlignment="Center" Height="25"/>
         </Button>
 

@@ -69,5 +69,22 @@ Class MainWindow
         BackupPanel.Visibility = Visibility.Visible
         'ExportDhud(sender, e)
     End Sub
+    Private Sub BackupAllSettings(sender As Object, e As RoutedEventArgs)
+        Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
+        Dim sourcePath = appData & "\Diabotical\Settings.txt"
+        Dim saveFileDialog2 As New SaveFileDialog With {
+            .Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
+            .FilterIndex = 1,
+            .RestoreDirectory = True
+        }
 
+        If saveFileDialog2.ShowDialog() = True Then
+            If File.Exists(sourcePath) = True Then
+                File.Copy(sourcePath, saveFileDialog2.FileName)
+                StatusText1.Text = "Backed up Settings.txt to: " & saveFileDialog2.FileName
+            Else
+                StatusText1.Text = "Could not find Diabotical Settings."
+            End If
+        End If
+    End Sub
 End Class

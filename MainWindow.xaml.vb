@@ -60,8 +60,9 @@ Class MainWindow
                             If currentField = "hud_definition" Then
                                 HudSettings = currentRow(1)
                                 StatusText1.Text = "Found HUD settings."
-                            Else
-                                StatusText1.Text = "HUD definition not found. Please restore a working settings file."
+                                'Else
+                                '@TODO Set flag to display this message
+                                'StatusText1.Text = "HUD definition not found. Please restore a working settings file."
                             End If
                         Next
                     Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException

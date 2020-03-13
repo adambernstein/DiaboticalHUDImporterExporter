@@ -38,6 +38,8 @@ Class MainWindow
             StatusText1.Text = "Could not find Diabolical settings."
         End If
     End Sub
+
+    'Helper functions
     Private Sub WriteHudFile(contents As String)
         Dim saveFileDialog1 As New SaveFileDialog With {
             .Filter = "dhud files (*.dhud)|*.dhud|All files (*.*)|*.*",
@@ -61,15 +63,6 @@ Class MainWindow
         OutputDisplayBox.Copy()
         StatusText1.Text = "Copied HUD settings to clipboard."
     End Sub
-    Private Sub ShowExportPanel(sender As Object, e As RoutedEventArgs)
-        BackupPanel.Visibility = Visibility.Collapsed
-        ExportPanel.Visibility = Visibility.Visible
-        ExportDhud(sender, e)
-    End Sub
-    Private Sub ShowBackupPanel(sender As Object, e As RoutedEventArgs)
-        ExportPanel.Visibility = Visibility.Collapsed
-        BackupPanel.Visibility = Visibility.Visible
-    End Sub
     Private Sub BackupAllSettings(sender As Object, e As RoutedEventArgs)
         Dim appData As String = GetFolderPath(SpecialFolder.ApplicationData)
         Dim sourcePath = appData & "\Diabotical\Settings.txt"
@@ -88,4 +81,31 @@ Class MainWindow
             End If
         End If
     End Sub
+
+    'Panel controls
+    Private Sub ShowExportPanel(sender As Object, e As RoutedEventArgs)
+        ExportPanel.Visibility = Visibility.Visible
+        DefaultPanel.Visibility = Visibility.Collapsed
+        BackupPanel.Visibility = Visibility.Collapsed
+        ImportPanel.Visibility = Visibility.Collapsed
+
+        ExportDhud(sender, e)
+    End Sub
+    Private Sub ShowImportPanel(sender As Object, e As RoutedEventArgs)
+        ImportPanel.Visibility = Visibility.Visible
+        ExportPanel.Visibility = Visibility.Collapsed
+        BackupPanel.Visibility = Visibility.Collapsed
+        DefaultPanel.Visibility = Visibility.Collapsed
+
+
+    End Sub
+    Private Sub ShowBackupPanel(sender As Object, e As RoutedEventArgs)
+        BackupPanel.Visibility = Visibility.Visible
+        ExportPanel.Visibility = Visibility.Collapsed
+        DefaultPanel.Visibility = Visibility.Collapsed
+        ImportPanel.Visibility = Visibility.Collapsed
+
+    End Sub
+
+
 End Class

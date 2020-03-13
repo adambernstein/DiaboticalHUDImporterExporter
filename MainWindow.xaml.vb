@@ -12,7 +12,12 @@ Class MainWindow
         Dim NewHudSettings As String = ""
 
         If SenderName = "ImportJSONFromPanel" Then
-            NewHudSettings = InputDisplayBox.Text
+            If InputDisplayBox.Text IsNot "" Then
+                NewHudSettings = InputDisplayBox.Text
+                MsgBox("Import Successful.")
+            Else
+                MsgBox("Paste HUD JSON first.")
+            End If
         ElseIf SenderName = "ImportFromFile" Then
             Dim SelectDhudFileDialog As New OpenFileDialog With {
                 .Filter = "dhud files (*.dhud)|*.dhud|All files (*.*)|*.*",
@@ -120,7 +125,7 @@ Class MainWindow
 
         If saveFileDialog2.ShowDialog() = True Then
             If File.Exists(sourcePath) = True Then
-                File.Copy(sourcePath, saveFileDialog2.FileName)
+                File.Copy(sourcePath, saveFileDialog2.FileName, True)
                 StatusText1.Text = "Backed up Settings.txt to: " & saveFileDialog2.FileName
             Else
                 StatusText1.Text = "Could not find Diabotical Settings."
